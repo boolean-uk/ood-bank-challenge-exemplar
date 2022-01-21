@@ -10,10 +10,6 @@ class Account {
     addTransaction(transaction) {
         this._transactions.push(transaction);
     }
-
-    get balance() {
-        return this._transactions.reduce((a, b) => a + b.amount, 0);
-    }
 }
 
 module.exports = Account;

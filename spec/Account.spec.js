@@ -19,14 +19,4 @@ describe('Account', () => {
 
         expect(account.transactions[account.transactions.length - 1]).toEqual(newTransaction);
     });
-
-    it('should calculate balance based on transactions', () => {
-        expect(account.balance).toEqual(30);
-    });
-
-    it('should account for negative transactions', () => {
-        account.addTransaction(new Transaction(-10, new Date));
-
-        expect(account.balance).toEqual(20);
-    });
 })

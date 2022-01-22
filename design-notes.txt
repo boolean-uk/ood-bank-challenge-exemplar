@@ -1,0 +1,113 @@
+
+Requirements
+
+- be able to deposit into Account
+- be able to withdraw from Account
+- be able to view an account Statement of a list of Transactions
+- store each transaction as a Transaction
+
+Entity requirements
+
+- a Bank holds several Accounts
+    - can open / close / return a bank account
+- Account is identified by account number and sort code
+- An Account holds the starting account balance and a history of all transactions
+    - return the current balance & starting balance
+    - allows to deposit more money
+    - allows to withdraw money (if available in the balance)
+    - allows to return a list of transactions in a range of dates
+    - allows to display a statement of transactions
+
+
+Class Design
+
+Client
+    PROPERTIES
+        id: uuid
+        fullName: string
+        email: string
+    METHODS
+    constructor(fullName, email)
+
+    - getID(): string
+    - getName(): string
+    - setName(newName): bool
+
+    - getEmail(): string
+    - setEmail(newEmail): bool
+
+
+Bank
+    PROPERTIES
+    - name: string
+    - accounts = [Account]
+    - clients = [Client]
+    - clientAccounts = {} // map between accounts, clients
+
+    METHODS
+    constructor(name)
+
+    - getName(): string
+
+    // accounts
+    - openAccount(clientId, startingBalance, openDate): Account? or null
+    - closeAccount(accountNumber): bool
+    - getAccount(accountNumber): Account?
+    - hasAccount(accountNumber): bool
+
+    // clients
+    - addClient(fullName, email): Client?
+    - getClient(clientId): Client?
+    - hasClient(fullName, email): bool
+    - removeClient(id): bool
+    - getClientAccounts(clientId): [Account]
+    - updateClientName(clientId, name)
+    - updateClientEmail(clientId, email)
+
+    - generateAccountNumber(numberLenght: number): string
+    
+Account
+    PROPERTIES
+    - number: string
+    - openDate: Date
+    - startingBalance: number
+    - transactions: [Transaction]
+    
+    METHODS
+    constructor(accountNumber, startingBalance, openDate)
+    - getNumber(): string
+    - getStartingBalance(): number
+
+    - withdraw(amount): Transaction? or null
+    - deposit(amount): Transaction? or null
+
+    - getAllTransactions():[Transactions]
+    - getTransactions(startDate, endDate): [Transactions]
+    - statement(): AccountStatement
+    - statementInRange(startDate, endDate)
+    - printStatement()
+    - printStatementInRange(startDate, endDate)
+
+Transaction
+    PROPERTIES
+        - date: Date
+        - amount: number
+        - type: string = 'credit', 'debit'
+    METHODS
+    constructor(date: Date, amount: number, mode: ')
+    - getDate(): Date
+    - getAmount(): number
+    - getType(): string
+
+AccountStatement
+    PROPERTIES
+        - transactions: [Transaction]
+    METHODS
+    - constructor(transactions?: [])
+    
+    - setTransactions(transactions: [Transaction])
+    - getTransactions() : [Transaction]
+
+    - print()
+
+

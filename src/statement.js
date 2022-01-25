@@ -2,7 +2,7 @@
 const StatementLine = require('./statementline')
 
 class Statement {
-  constructor(account) {
+  constructor (account) {
     this.statementLines = []
 
     const sortedTransactions = account.transactions.sort((left, right) => {
@@ -10,12 +10,10 @@ class Statement {
     })
 
     let currentBalance = account.startingBalance
-    for(var t = 0; t < sortedTransactions.length; t++) {
-      let balanceAfterTransaction = currentBalance
-      if(sortedTransactions[t].type === 'credit') {
+    for (let t = 0; t < sortedTransactions.length; t++) {
+      if (sortedTransactions[t].type === 'credit') {
         currentBalance += sortedTransactions[t].amount
-      }
-      else if(sortedTransactions[t].type === 'debit') {
+      } else if (sortedTransactions[t].type === 'debit') {
         currentBalance -= sortedTransactions[t].amount
       }
       this.statementLines.push(new StatementLine(sortedTransactions[t], currentBalance))
@@ -24,12 +22,12 @@ class Statement {
     this.statementLines = this.statementLines.reverse()
   }
 
-  getStatementLines() {
+  getStatementLines () {
     return this.statementLines
   }
 
-  print() {
-    console.table(this.statementLines, ["date", 'credit', 'debit', 'balance'])
+  print () {
+    console.table(this.statementLines, ['date', 'credit', 'debit', 'balance'])
   }
 }
 

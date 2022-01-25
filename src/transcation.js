@@ -1,42 +1,40 @@
 
-
 class Transaction {
-    constructor(date, amount, type, balanceAfterTransaction) {
-        this.date = date === undefined ? new Date() : date;
-        this.amount = (amount === undefined || amount <= 0) ? 0 : amount;
-        this.type = (type !== 'credit' && type !== 'debit') ? '' : type;
-    }
+  constructor (date, amount, type, balanceAfterTransaction) {
+    this.date = date === undefined ? new Date() : date
+    this.amount = (amount === undefined || amount <= 0) ? 0 : amount
+    this.type = (type !== 'credit' && type !== 'debit') ? '' : type
+  }
 
-    isValid() {
-        let validTransaction = true;
-        if(this.type !== "credit" && this.type !== "debit") {
-            validTransaction = false;
-        }
-        if(isNaN(this.date)) {
-            validTransaction = false;
-        }
-        if(this.amount <= 0) {
-            validTransaction = false;
-        }
-        return validTransaction;
+  isValid () {
+    let validTransaction = true
+    if (this.type !== 'credit' && this.type !== 'debit') {
+      validTransaction = false
     }
-
-    getAmount() {
-        return this.amount;
+    if (isNaN(this.date)) {
+      validTransaction = false
     }
-
-    getDate() {
-        return this.date;
+    if (this.amount <= 0) {
+      validTransaction = false
     }
+    return validTransaction
+  }
 
-    getDateString() {
-        return this.date.toLocaleDateString();
-    }
+  getAmount () {
+    return this.amount
+  }
 
-    getType() {
-        return this.type
-    }
+  getDate () {
+    return this.date
+  }
 
+  getDateString () {
+    return this.date.toLocaleDateString()
+  }
+
+  getType () {
+    return this.type
+  }
 };
 
-module.exports = Transaction;
+module.exports = Transaction

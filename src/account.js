@@ -1,3 +1,4 @@
+const Statement = require("./statement");
 const Transaction = require("./transcation");
 
 class Account {
@@ -19,10 +20,11 @@ class Account {
     return balance
   }
 
-  deposit(amount) {
+  deposit(amount, date) {
     let transaction = null;
     if(amount > 0) {
-      transaction = new Transaction(new Date(), amount, 'credit')
+      let transactionDate = (date === undefined) ? new Date() : date
+      transaction = new Transaction(transactionDate, amount, 'credit')
       this.transactions.push(transaction)
     }
     return transaction;
@@ -34,13 +36,18 @@ class Account {
     return (newBalance >= 0)
   }
 
-  withdraw(amount) {
+  withdraw(amount, date) {
     let transaction = null
     if(amount > 0 && this.canWidthdraw(amount)) {
-      transaction = new Transaction(new Date(), amount, 'debit')
+      let transactionDate = (date === undefined) ? new Date() : date
+      transaction = new Transaction(transactionDate, amount, 'debit')
       this.transactions.push(transaction)
     }
     return transaction
+  }
+
+  statement() {
+    return new Statement(this)
   }
 }
 

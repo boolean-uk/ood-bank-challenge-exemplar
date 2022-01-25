@@ -64,4 +64,40 @@ describe("Account class", function() {
 
     expect(account.withdraw(2000)).toBeNull()
   })
+
+  it('should allow specifying specific date for withdrawal/deposit', () => {
+    const startingBalance = 100
+    const account = new Account(startingBalance)
+
+    const customDate = new Date(2020, 12, 10)
+
+    let transaction = account.deposit(100, customDate)
+    expect(transaction).not.toBeNull()
+    expect(transaction.date.toLocaleDateString()).toBe(customDate.toLocaleDateString());
+
+    transaction = account.withdraw(100, customDate)
+    expect(transaction).not.toBeNull()
+    expect(transaction.date.toLocaleDateString()).toBe(customDate.toLocaleDateString());
+  })
+
+  it('should return sorted statement', () => {
+    const startingBalance = 0
+    const account = new Account(startingBalance)
+
+    account.deposit(2000, new Date(2012, 0, 13))
+    account.deposit(1000, new Date(2012, 0, 10))
+    account.withdraw(500, new Date(2012, 0, 14))
+
+    const statement = account.statement()
+
+    expect(statement.statementLines.length).toBe(3)
+    expect(statement.statementLines[0].debit).toEqual(500)
+    expect(statement.statementLines[0].balance).toEqual(2500)
+
+    expect(statement.statementLines[1].credit).toEqual(2000)
+    expect(statement.statementLines[1].balance).toEqual(3000)
+
+    expect(statement.statementLines[2].credit).toEqual(1000)
+    expect(statement.statementLines[2].balance).toEqual(1000)    
+  })
 })

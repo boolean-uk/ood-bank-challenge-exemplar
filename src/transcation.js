@@ -1,7 +1,7 @@
 
 
 class Transaction {
-    constructor(date, amount, type) {
+    constructor(date, amount, type, balanceAfterTransaction) {
         this.date = date === undefined ? new Date() : date;
         this.amount = (amount === undefined || amount <= 0) ? 0 : amount;
         this.type = (type !== 'credit' && type !== 'debit') ? '' : type;

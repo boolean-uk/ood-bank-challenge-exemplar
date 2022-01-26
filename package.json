@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx eslint src && npx jasmine"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/boolean-uk/ood-bank-challenge-exemplar/issues"
   },
-  "homepage": "https://github.com/boolean-uk/ood-bank-challenge-exemplar#readme"
+  "homepage": "https://github.com/boolean-uk/ood-bank-challenge-exemplar#readme",
+  "dependencies": {
+    "jasmine": "^4.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0"
+  }
 }

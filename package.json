@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/boolean-uk/ood-bank-challenge-exemplar/issues"
   },
-  "homepage": "https://github.com/boolean-uk/ood-bank-challenge-exemplar#readme"
+  "homepage": "https://github.com/boolean-uk/ood-bank-challenge-exemplar#readme",
+  "dependencies": {
+    "jasmine": "^4.0.2"
+  }
 }

@@ -1,9 +1,9 @@
 class TransactionHistory {
-  constructor() {
+  constructor () {
     this.transactions = []
   }
 
-  add(transaction) {
+  add (transaction) {
     this.transactions.push(transaction)
   }
 }

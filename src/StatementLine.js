@@ -1,9 +1,9 @@
 class StatementLine {
-  constructor(transaction) {
+  constructor (transaction) {
     this.transaction = transaction
   }
 
-  toString(balance, delimiter) {
+  toString (balance, delimiter) {
     return [
       this.transaction.getDate().toLocaleDateString(),
       this.transaction.credit(),

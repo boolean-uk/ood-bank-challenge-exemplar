@@ -1,0 +1,31 @@
+classDiagram
+    StatementPrinter ..> Transaction
+    StatementPrinter ..> Account
+    StatementPrinter ..> StatementTransaction
+    StatementTransaction ..> Transaction
+    Account ..> Transaction
+    class Transaction
+    Transaction : -string type
+    Transaction : -number amount
+    Transaction : -Date date
+    Transaction : -number balance
+    Transaction : +string getType()
+    Transaction : +number getAmount()
+    Transaction : +Date getDate()
+    Transaction : number getBalance()
+    class Account
+    Account : -Transaction[] transactions
+    Account : -number balance
+    Account : +Transaction newTransaction(type, amount)
+    Account : +Transaction[] getTransactions()
+    Account : -updateBalance(transactionType, transactionAmount)
+    class StatementPrinter
+    StatementPrinter : -Account account
+    StatementPrinter : +void printStatement()
+    StatementPrinter : -StatementTransaction[] generateStatementTransactions()
+    class StatementTransaction
+    StatementTransaction : +string date
+    StatementTransaction : +string credit
+    StatementTransaction : +string debit
+    StatementTransaction : +string balance
+

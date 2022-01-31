@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "npx eslint src && npx jasmine"
+    "test": "npx eslint src && npx jasmine ./spec/**.spec.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,12 @@
     "jasmine": "^4.0.2"
   },
   "devDependencies": {
-    "eslint": "^7.32.0"
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jasmine": "^4.1.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.1",
+    "jasmine": "4.0.2"
   }
 }

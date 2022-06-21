@@ -10,27 +10,6 @@ class Statement {
         this.#account = account;
     }
 
-    getLines() {
-
-        const transactions = this.#account?.getTransactions()
-
-        if (transactions) {
-
-            let balance = 0;
-            return transactions
-                .map(tx => {
-                    balance += tx.amount;
-                    return {
-                        date: tx.date, 
-                        amount: tx.amount,
-                        balance: balance
-                    }
-                })
-                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-        }
-        return []
-    }
-
     /**
      * 
      * @returns 
@@ -41,21 +20,25 @@ class Statement {
      */
     print() {
 
-        const statementLines = this.getLines()
-        let balance = 0
-        const delimiter = statementVars.delimiter
+        const txs = this.#account?.getTransactions()
+        if (txs) {
 
-        const lines = statementLines.map(line => {
-          balance += line.amount
-          const thisLine = line.amount >= 0 ? 
-            `${line.date}${delimiter}${(line.amount).toFixed(2)}${delimiter}${delimiter}${balance.toFixed(2)}` : 
-            `${line.date}${delimiter}${delimiter}${(line.amount * -1).toFixed(2)}${delimiter}${balance.toFixed(2)}`
-          return thisLine
-        }).reverse()
+            let balance = 0
+            const delimiter = statementVars.delimiter
 
-        lines.unshift(statementVars.columns.join(delimiter))
-        
-        return lines.join('\n')
+            const lines = txs.map(line => {
+                balance += line.amount
+                const thisLine = line.amount >= 0 ? 
+                    `${line.date}${delimiter}${(line.amount).toFixed(2)}${delimiter}${delimiter}${balance.toFixed(2)}` : 
+                    `${line.date}${delimiter}${delimiter}${(line.amount * -1).toFixed(2)}${delimiter}${balance.toFixed(2)}`
+                return thisLine
+            }).reverse()
+
+            lines.unshift(statementVars.columns.join(delimiter))
+            
+            return lines.join('\n')
+        }
+        return ''
     }
 }
 
